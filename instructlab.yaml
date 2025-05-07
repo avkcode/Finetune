@@ -1,0 +1,105 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: instructlab-config
+data:
+  config.yaml: |
+    chat:
+      context: default
+      greedy_mode: false
+      logs_dir: data/chatlogs
+      max_tokens: null
+      model: models/merlinite-7b-lab-Q4_K_M.gguf
+      session: null
+      vi_mode: false
+      visible_overflow: true
+
+    general:
+      log_level: INFO
+      debug_level: 0
+
+    generate:
+      chunk_word_count: 1000
+      model: models/merlinite-7b-lab-Q4_K_M.gguf
+      num_cpus: 10
+      num_instructions: 100
+      output_dir: data/generated
+      prompt_file: prompts.yaml
+      seed_file: seeds.yaml
+      taxonomy_base: origin/main
+      taxonomy_path: taxonomy
+
+    serve:
+      backend: vllm
+      chat_template: auto
+      host_port: 0.0.0.0:8000
+      model_path: models/merlinite-7b-lab-Q4_K_M.gguf
+      llama_cpp:
+        gpu_layers: -1
+        llm_family: ''
+        max_ctx_size: 4096
+      vllm:
+        llm_family: ''
+        vllm_args: ["--tensor-parallel-size", "1"]
+        gpus: 1
+
+    evaluate:
+      base_model: models/merlinite-7b-lab-Q4_K_M.gguf
+      gpus: 1
+      mmlu:
+        batch_size: 16
+        few_shots: 5
+      mmlu_branch:
+        tasks_dir: benchmarks/mmlu
+      mt_bench:
+        judge_model: gpt-4
+        max_workers: 4
+        output_dir: benchmarks/mt_bench
+      mt_bench_branch:
+        taxonomy_path: taxonomy
+
+    train:
+      model_path: models/merlinite-7b-lab-Q4_K_M.gguf
+      data_path: data/generated
+      data_output_dir: data/train_output
+      ckpt_output_dir: checkpoints
+      num_epochs: 3
+      effective_batch_size: 64
+      lora_rank: 8
+      lora_quantize_dtype: bf16
+      nproc_per_node: 1
+      max_seq_len: 4096
+      max_batch_len: 1024
+      is_padding_free: true
+      deepspeed_cpu_offload_optimizer: true
+      save_samples: 100
+      additional_args: {}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: instructlab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: instructlab
+  template:
+    metadata:
+      labels:
+        app: instructlab
+    spec:
+      containers:
+        - name: instructlab
+          image: redhat/instructlab:latest
+          imagePullPolicy: Always
+          command: ["ilab", "--config", "/app/config.yaml", "generate"]
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config.yaml
+              subPath: config.yaml
+      volumes:
+        - name: config-volume
+          configMap:
+            name: instructlab-config
