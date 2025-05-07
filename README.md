@@ -148,7 +148,7 @@ In short, InstructLab makes models better at following instructions and deliveri
 ---
 ## Deployment
 
-InstructLab can be installed locally using `pip` or the `uv` package manager, making it easy to set up for individual use or testing. Alternatively, it can run inside a Docker container, providing a consistent environment for development and deployment. For scalable production environments, [InstructLab can also be deployed on Kubernetes](https://github.com/avkcode/InstructLab/blob/main/instructlab.yaml), leveraging its orchestration capabilities to handle scaling and resource management efficiently. This flexibility ensures it adapts to various workflows, from local experimentation to large-scale distributed deployments.
+InstructLab can be installed locally using `pip` or the `uv` package manager, making it easy to set up for individual use or testing. Alternatively, it can run inside a Docker container, providing a consistent environment for development and deployment. For scalable production environments, [InstructLab can also be deployed on Kubernetes](https://github.com/avkcode/Finetune/blob/main/instructlab.yaml), leveraging its orchestration capabilities to handle scaling and resource management efficiently. This flexibility ensures it adapts to various workflows, from local experimentation to large-scale distributed deployments.
 
 To deploy InstructLab on Kubernetes, use a Makefile to define and manage Kubernetes resources like Deployments and ConfigMaps as multi-line variables. Dynamically generate labels and annotations using Git metadata and environment variables. Validate configurations, enforce constraints, and apply manifests with `kubectl`. This approach avoids Helm's complexity while maintaining flexibility and transparency.
 
