@@ -1,3 +1,8 @@
+<div align="center">
+
+# Fine-Tuning Models with Your Own Data, Effortlessly  
+
+![Cover Image](cover.png)
 
 Most blog posts focus on using top-tier LLMs or setting up complex AI pipelines for large corporations. But what if your data is private, and you don’t have access to top-tier ML talent or massive infrastructure? In this article, we show how to fine-tune a model for mid-sized software development teams or IT support, using your own domain expertise. With **Apache Answer** and **InstructLab**, you can build a powerful, cost-effective AI solution tailored to your specific needs.
 
