@@ -64,7 +64,7 @@ YAML files produced by **Apache Answer** contain structured question-answer da
 ┌──────────────────────────────────────────────────────┐
 │               Information Retrieval                  │
 ├─────────────────┬──────────────────┬─────────────────┤
-│   Apache Solr   │   Search APIs     │  Other Sources │
+│   Apache Solr   │   Search APIs    │  Other Sources  │
 └─────────────────┴──────────────────┴─────────────────┘
                             │
                             ▼
