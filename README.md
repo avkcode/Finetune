@@ -99,53 +99,15 @@ With **CAG**, where information is pre-loaded into a cache, InstructLab helps t
 
 In short, InstructLab makes models better at following instructions and delivering useful answers — whether the data comes in real-time (RAG) or from a pre-built cache (CAG).
 
-```
-╔══════════════════════════════════════════╗
-║        AI Query Processing Pipeline      ║
-╚══════════════════════════════════════════╝
-                  ▼
-╔══════════════════════════════════════════╗
-║             User Query                   ║
-║       (Natural Language Input)           ║
-╚══════════════════════════════════════════╝
-                  │
-         ┌────────┴────────┐
-         ▼                 ▼
-╔═══════════════╗   ╔═══════════════╗
-║   RAG Flow    ║   ║   CAG Flow    ║
-║ (Real-Time)   ║   ║  (Cached)     ║
-╚═══════════════╝   ╚═══════════════╝
-         │                 │
-    ┌────┴────┐       ┌────┴────┐
-    ▼         ▼       ▼         ▼
-╔══════════════════════════════════════════╗
-║     Retrieve External Knowledge Sources  ║
-║ • Vector DBs (e.g., FAISS)               ║
-║ • Search APIs, Real-Time Web Docs        ║
-╚══════════════════════════════════════════╝
-         │                 │
-    ┌────┴────┐       ┌────┴────┐
-    ▼         ▼       ▼         ▼
-╔══════════════════════════════════════════╗
-║       InstructLab-Tuned LLM Model        ║
-║ • Enhanced Instruction-Following         ║
-║ • Improved Contextual Grounding          ║
-╚══════════════════════════════════════════╝
-         │                 │
-    ┌────┴────┐       ┌────┴────┐
-    ▼         ▼       ▼         ▼
-╔══════════════════════════════════════════╗
-║              Final Answer                ║
-║ • Context-Rich Reply for Real-Time Data  ║
-║ • Fast Cached Response for Pre-Processed ║
-╚══════════════════════════════════════════╝
-
-┌───────────────────────────────────────────┐
-│     InstructLab Fine-Tuning Process       │
-│ • Refines Models on Curated Instructions  │
-│ • Supports Real-Time & Static Pipelines   │
-│ • Boosts Coherence, Relevance, Tone       │
-└───────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    A[User Input] --> B[Apache Answer Processing]
+    B --> C[QA Seed, Skills, Taxonomy]
+    C --> D[Knowledge Enrichment]
+    D --> E[Information Retrieval]
+    E --> F[Apache Solr, Search APIs, Other Sources]
+    F --> G[InstructLab LLM Model]
+    G --> H[Final Answer: Context-Rich, Verified]
 ```
 
 ---
