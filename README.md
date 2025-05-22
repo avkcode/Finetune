@@ -123,29 +123,4 @@ To deploy InstructLab on Kubernetes, use a Makefile to define and manage Kuberne
 git clone https://github.com/avkcode/InstructLab.git
 ```
 
-Using kubectl:
-```
-kubectl apply -f instructlab.yaml
-```
-
-Using make:
-```
-make =>
-InstructLab Management System
-
-Available targets:
-
-Deployment:
-  deploy              - Deploy InstructLab with ConfigMap
-  undeploy            - Remove InstructLab deployment
-
-Interaction:
-  logs                - View container logs
-  status              - Show deployment status
-
-Utility:
-  help                - Show this help message
-```
-
----
-With tools like **Apache Answer** and **InstructLab**, you can fine-tune models using your domain knowledge without needing vast resources. You don't need to be a large corporation or have a huge ML team to harness the power of AI for your specific needs.
+Deploy InstructLab using Kubernetes for scalable AI model fine-tuning. To deploy, clone the repository and use make deploy to create the ConfigMap and Deployment with a single command. Alternatively, apply the instructlab.yaml file directly with kubectl apply -f instructlab.yaml. For undeployment, run make undeploy. Check deployment status and logs using make status and make logs, respectively. The Makefile simplifies management of the InstructLab deployment pipeline, including configuration, scaling, and monitoring.
